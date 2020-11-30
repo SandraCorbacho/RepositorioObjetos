@@ -1,0 +1,16 @@
+{
+    "dbconf_dev":{
+        "driver":"mysql",
+        "dbhost":"localhost",
+        "dbuser":"sandra",
+        "dbname":"tablero",
+        "dbpass":"linuxlinux"
+    },
+    "dbconf_pro":{
+        "driver":"mysql",
+        "dbhost":"cosa.cesnuria.com",
+        "dbuser":"cosa_sandra",
+        "dbname":"cosa_tablero",
+        "dbpass":""
+    }
+}
