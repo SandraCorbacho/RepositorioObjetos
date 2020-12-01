@@ -6,4 +6,5 @@ RewriteCond %{REQUEST_FILNAME} -s [OR]
 RewriteCond %{REQUEST_FILNAME} -d [OR]
 RewriteCond %{REQUEST_FILNAME} -f
 
+RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]

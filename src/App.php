@@ -13,21 +13,22 @@ final class App{
         $action = $req->getAction();
         
     try{
+       
       if(in_array($controller,$routes)){
             //Capturar el nombre del controlador 
             $nameController = '\\App\Controllers\\'.ucfirst($controller).'Controller';
-        
+            
             //lanzar instacia del controlado
             //llamada a la funcion accion
             
             $objContr = new $nameController($req,$session);
-            
             //dispatcher
             //comprobar si existe la accion como metodo en el objeto
+            
             if(is_callable([$objContr, $action])){
                 call_user_func([$objContr,$action]);
             }else{
-                \call_user_func([$objContr,'error']);
+                call_user_func([$objContr,'error']);
             }
 
       }else{

@@ -9,7 +9,7 @@ abstract Class Controller implements View,ExPDO{
     protected $session;
 
     
-    function __construct($request,$session){
+    function __construct($request,Session $session){
         $this->request = $request;
         $this->session = $session;
     }

@@ -1,7 +1,7 @@
 <?php
 
-include 'header.tpl.php';
-$title = 'task';
+include 'base.tpl.php';
+
 ?>
 
 
@@ -53,7 +53,7 @@ $title = 'task';
     </div>
     <div id='addForm' class='container-form'>
                 <span class='closeform'>X</span>
-                 <form action="app/controllers/addTaskController.php" method='POST'>
+                 <form action="task/create" method='POST'>
                         <label for="itemName">Nombre de la Tarea</label>
                         <input type="text" name='itemName' required>
                         <label for="description">Descripción de la tarea</label>

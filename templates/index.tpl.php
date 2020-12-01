@@ -25,9 +25,9 @@
         </div>
         
             <div class="col-md-12 col-xs-12 login_control">
-                
-                <form id='form' action="app/controllers/userController.php" method='POST'>
-             
+                <!--La accion se pone controlador/accion-->
+                <!--href == controlador / accion-->
+                <form id='form' action="/user/login" method='POST'>
                     <div class="control">
                         <div class="label">Email Address</div>
                         <input type="hidden" name='type' id='type' value='login'>
