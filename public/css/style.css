@@ -13,6 +13,9 @@ body{
     margin: auto;
     top: 65px;
     }
+    input,textarea,.addsubtarea{
+        color: black;
+    }
    div h3 span{
         color : #FFF;
         font-size:25px;

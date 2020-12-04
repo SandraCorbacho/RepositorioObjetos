@@ -3,10 +3,10 @@
 namespace App;
 
 class Request{
-    private string $controller;
-    private string $action;
-    private string $method;
-    private array $params;
+    private $controller;
+    private $action;
+    private $method;
+    private $params;
 
     protected $arrayURI;
 

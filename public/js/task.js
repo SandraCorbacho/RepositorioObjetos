@@ -39,5 +39,11 @@ $( document ).ready(function() {
         $('#editForm').attr('style','display:flex');
 
     })
-    console.log(Date());
+    $('.addsubtarea').click(function(){
+        let fila = $(this).parent().parent();
+        $('#subtareaIdItem').val($(fila[0]['cells'][0]).text());
+        $('#subtareaForm').attr('style','display:flex');
+      
+    });
+    
 })

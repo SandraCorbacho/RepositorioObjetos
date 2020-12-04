@@ -32,17 +32,20 @@ include 'base.tpl.php';
                 </tr>
                 <?php
                 $table='';                
-               
+        
+        
+                var_dump($data);
+                die();
                  foreach($data as $key=>$dato){
                     $table.= "<tr>";
                         $table.=" <td style='color:black'>".$data[$key]['id']."</td>";
                         $table.=" <td style='color:black'>".$data[$key]['name']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['itemName']."</td>";
                         $table.=" <td style='color:black'>".$data[$key]['description']."</td>";
+                        $table.=" <td style='color:black'>".$data[$key]['itemName']."</td>";
                         $table.=" <td style='color:black'>".$data[$key]['completed']."</td>";
                         $table.=" <td style='color:black'>".$data[$key]['start_date']."</td>";
                         $table.=" <td style='color:black'>".$data[$key]['finish_date']."</td>";
-                        $table.=" <td style='color:black' class='options'><span class='editTask' style='color:black'>Modificar</span> <span class='deleteTask' style='color:black'> Borrar</span></td>";
+                        $table.=" <td style='color:black' class='options' ><span class='addsubtarea'>Añadir subtarea</span><span class='editTask' style='color:black'>Modificar</span> <span class='deleteTask' style='color:black'> Borrar</span></td>";
                     $table.="</tr>";
                  }
                  
@@ -67,7 +70,7 @@ include 'base.tpl.php';
     </div>
     <div id='deleteForm' class='container-form deleteForm'>
                 <span class='closeform'>X</span>
-                 <form action="app/controllers/deleteTaskController.php" method='POST'>
+                 <form action="task/delete" method='POST'>
                         <label for="itemName">Seguro que quieres borrar: </label>
                         <input type="hidden" id='idTask' name='idTask'>
                         <p id='description'></p>
@@ -90,6 +93,15 @@ include 'base.tpl.php';
                         <input type="date" name='editFinish_date' id='editFinish_date' required >
                         <input type="submit" value='Guardar Cambios'>
                 </form>    
+    </div>
+    <div id='subtareaForm' class='container-form subtarea'>
+        <span class='closeform'>X</span>
+            <form action="task/subtarea" method='POST'>
+                <input type="hidden" id='subtareaIdItem' name='idItem'>
+                <input type="text" name='itemName' required>
+                <label for="description">Descripción de la tarea</label>                    
+                <input type="submit" value='Guardar Tarea'>
+        </form>
     </div>
 </div>
 

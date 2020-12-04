@@ -99,7 +99,7 @@ class DB extends \PDO{
     
     //definimos las funciones
     public function createUser(array $data){
-        if(!existUser($data['email'])){
+        if(!$this->existUser($data['email'])){
             
             $stmt = self::$instance->prepare("INSERT INTO users (email,name,subname,password,role) values ('{$data['email']}','{$data['name']}', '{$data['surname']}', '{$data['pass']}', {$data['role']});");
             $stmt->execute();
@@ -107,8 +107,8 @@ class DB extends \PDO{
         }
         return false;
     }
-    function existUser($email,array $data = null){
-        
+    private function existUser($email, &$data=null){
+       
         try{   
              
             $stmt=self::$instance->prepare('SELECT * FROM users WHERE email=:email LIMIT 1');
@@ -121,6 +121,7 @@ class DB extends \PDO{
     
             if($count==1){ 
                 $data = $row;
+                
                 return true;   
             }else{
                 return false;
@@ -129,26 +130,7 @@ class DB extends \PDO{
             return false;
         }
     }
-    function insertTask($data){
-        $user=[];
-       
-        if(existUser($data['email'],$user)){
-            die($user);
-            $sql = "INSERT INTO tasks (description,user,start_date,finish_date) values ('{$data['description']}',{$user[0]['id']},'{$data['start_date']}','{$data['finish_date']}');";
-        
-            $stmt = self::$instance->prepare($sql);
-            $stmt->execute();
-        
-            $stmt=self::$instance->prepare("SELECT MAX(id) AS id FROM tasks;");
-            $stmt->execute();
-            $row=$stmt->fetchAll(\PDO::FETCH_ASSOC);  
-           
-            $stmt = self::$instance->prepare("INSERT INTO task_items (taskeId,completed,itemName) values ({$row[0]['id']},0,'{$data['description']}');");
-            $stmt->execute();
-            return true;
-        }
-        return false;
-    }
+    
     function deleteTask($idTask){
         
         try{
@@ -199,5 +181,38 @@ class DB extends \PDO{
         }
         return true;
        
+    }
+    public function insertTask($data){
+        $user=[];
+        
+        if($this->existUser($data['email'],$user)){
+            
+            
+            $sql = "INSERT INTO tasks (description,user,start_date,finish_date) values ('{$data['description']}',{$user[0]['id']},'{$data['start_date']}','{$data['finish_date']}');";
+        
+            $stmt = self::$instance->prepare($sql);
+            $stmt->execute();
+        
+            $stmt=self::$instance->prepare("SELECT MAX(id) AS id FROM tasks;");
+            $stmt->execute();
+            $row=$stmt->fetchAll(\PDO::FETCH_ASSOC);  
+           
+            $stmt = self::$instance->prepare("INSERT INTO task_items (taskeId,completed,itemName) values ({$row[0]['id']},0,'{$data['itemName']}');");
+            $stmt->execute();
+            return true;
+        }
+        return false;
+    }
+    public function insertSubtarea($data){
+     
+           try{
+            $stmt = self::$instance->prepare("INSERT INTO task_items (taskeId,completed,itemName) values ({$data['idItem']},0,'{$data['itemName']}');");
+            $stmt->execute();
+            return true;
+           }  catch(ExceptionErr $e){
+            return false;
+           }
+        
+        
     }
 }

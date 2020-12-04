@@ -23,15 +23,32 @@ final class TaskController extends Controller implements View,ExPDO{
     public function create(){
         
         $data = [
-           
-            'itemName' => filter_input(INPUT_POST,'itemName'),
-            'description' => filter_input(INPUT_POST,'description'),
+            'itemName' => filter_input(INPUT_POST,'description'),
+            'description' => filter_input(INPUT_POST,'itemName'),
+            
             'email' => $_SESSION['email'],
             'start_date' =>filter_input(INPUT_POST,'start_date'),
             'finish_date' =>filter_input(INPUT_POST,'finish_date'),
 
         ];
-        $this->getDB()->insertTask($data);
+        
+       $this->getDB()->insertTask($data);
+       header('Location:/task');
+
+    }
+    public function delete(){
+
+        $idTask = filter_input(INPUT_POST,'idTask');
+        $this->getDB()->deleteTask($idTask);
+        header('Location:/task');
+    }
+    public function subtarea(){
+        $data=[
+        'idItem' => filter_input(INPUT_POST,'idItem'),
+        'itemName' => filter_input(INPUT_POST,'itemName')
+        ];
+        $this->getDB()->insertSubtarea($data);
+        header('Location:/task');
     }
 
 
