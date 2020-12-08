@@ -3,10 +3,7 @@
 include 'base.tpl.php';
 
 ?>
-
-
-  
-
+<script src="/public/js/task.js"></script>
 <div class="container contaienr-task">
 	<div class="row login_box container-banner-principal">
 	    <div class="col-md-12 col-xs-12" align="center">
@@ -21,10 +18,10 @@ include 'base.tpl.php';
                 color: black;width:100%'>
             
                 <tr>
-                    <th style='color:black'>id</th>
-                    <th style='color:black'>Usuario</th>
-                    <th style='color:black'>Tarea</th>
+                    <th style='color:black;'>id</th>
                     <th style='color:black'>Descripción</th>
+                    <th style='color:black'>SubTarea</th>
+                    <th style='color:black'>Usuario</th>
                     <th style='color:black'>Completada</th>
                     <th style='color:black'>fecha Inicio</th>
                     <th style='color:black'>Fecha Fin</th>
@@ -32,21 +29,38 @@ include 'base.tpl.php';
                 </tr>
                 <?php
                 $table='';                
-        
-        
-                var_dump($data);
-                die();
-                 foreach($data as $key=>$dato){
-                    $table.= "<tr>";
-                        $table.=" <td style='color:black'>".$data[$key]['id']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['name']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['description']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['itemName']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['completed']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['start_date']."</td>";
-                        $table.=" <td style='color:black'>".$data[$key]['finish_date']."</td>";
+                
+                 foreach($data as $datos){
+                foreach($datos as $key=>$dato){
+                   
+                
+                    if($key =='task'){
+                        $table.= "<tr>";
+                        $table.="<td style='color:black;'>".$dato['id']."</td>";
+                        $table.="<td style='color:black;'>".$dato['description']."</td>";
+                        $table.="<td style='color:black;'>-------</td>";
+                        $table.="<td style='color:black;'>".$dato['user']."</td>";
+                        $table.="<td style='color:black;'>0</td>";
+                        $table.="<td style='color:black;'>".$dato['start_date']."</td>";
+                        $table.="<td style='color:black;'>".$dato['finish_date']."</td>";
                         $table.=" <td style='color:black' class='options' ><span class='addsubtarea'>Añadir subtarea</span><span class='editTask' style='color:black'>Modificar</span> <span class='deleteTask' style='color:black'> Borrar</span></td>";
-                    $table.="</tr>";
+                        $table.='</tr>';
+                        $table.= "<tr>";
+                        
+                    }else if($key == 'task_items'){
+                        foreach($dato as $taskItem){
+                            $table.= "<tr>";
+                            $table.="<td style='color:black;'>".$taskItem['id']."</td>";
+                            $table.="<td style='color:black;'></td>";
+                            $table.=" <td style='color:black; '>".$taskItem['itemName']."</td>";
+                            $table.="<td style='color:black;'></td>";
+                            $table.="<td style='color:black;'>".$taskItem['completed']."</td>";
+                            $table.='</tr>';
+                        }
+                    }
+                }
+                   
+                    
                  }
                  
                  echo $table;
@@ -105,8 +119,8 @@ include 'base.tpl.php';
     </div>
 </div>
 
-
  <?php
+
 include 'footer.tpl.php';
 
 ?>

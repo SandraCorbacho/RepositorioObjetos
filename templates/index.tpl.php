@@ -1,4 +1,5 @@
 <?php include 'base.tpl.php'?>
+<script src="/public/js/home.js"></script>
 <div class="container">
 	<div class="row login_box">
 	    <div class="col-md-12 col-xs-12" align="center">

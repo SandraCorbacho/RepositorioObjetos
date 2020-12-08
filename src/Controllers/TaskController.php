@@ -15,8 +15,15 @@ final class TaskController extends Controller implements View,ExPDO{
         parent::__construct($request, $session);
     }
     public function index(){
+        
+        if(!isset($_SESSION['email'])){
+            header('Location:'.BASE.'/');
+        }
         $user = $_SESSION['email'];
-        $data = $this->getDB()->selectWithoutJoin($user);
+        //$data = $this->getDB()->selectWithoutJoin($user);
+        $data = $this->getDB()->getDataItems($user);
+        //v//ar_dump($data);
+        //die();
         $dataView = ['title' => 'task','data'=>$data];
         $this->render($dataView,'task');
     }
@@ -33,22 +40,23 @@ final class TaskController extends Controller implements View,ExPDO{
         ];
         
        $this->getDB()->insertTask($data);
-       header('Location:/task');
+       header('Location:'.BASE.'/task');
 
     }
     public function delete(){
 
         $idTask = filter_input(INPUT_POST,'idTask');
         $this->getDB()->deleteTask($idTask);
-        header('Location:/task');
+        header('Location:'.BASE.'/task');
     }
     public function subtarea(){
         $data=[
         'idItem' => filter_input(INPUT_POST,'idItem'),
         'itemName' => filter_input(INPUT_POST,'itemName')
         ];
+       
         $this->getDB()->insertSubtarea($data);
-        header('Location:/task');
+        header('Location:'.BASE.'/task');
     }
 
 

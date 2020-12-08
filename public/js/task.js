@@ -1,6 +1,8 @@
 
 $( document ).ready(function() {
+  
     $('#addTask').click(function(){
+      
         $('#addForm').attr('style','display:flex')
     })
     $('.closeform').click(function(){

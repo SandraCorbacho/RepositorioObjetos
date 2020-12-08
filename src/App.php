@@ -13,11 +13,13 @@ final class App{
         $action = $req->getAction();
         
     try{
-       
+       // var_dump($controller);
+        //die();
       if(in_array($controller,$routes)){
             //Capturar el nombre del controlador 
             $nameController = '\\App\Controllers\\'.ucfirst($controller).'Controller';
-            
+            //var_dump($nameController);
+            //die();
             //lanzar instacia del controlado
             //llamada a la funcion accion
             

@@ -107,7 +107,7 @@ class DB extends \PDO{
         }
         return false;
     }
-    private function existUser($email, &$data=null){
+    public function existUser($email, &$data=null){
        
         try{   
              
@@ -152,11 +152,34 @@ class DB extends \PDO{
      }
      function selectWithoutJoin(string $email):array{
         
-        $sql="SELECT * FROM users INNER JOIN tasks on users.id = tasks.user INNER JOIN task_items on tasks.id = task_items.taskeid WHERE users.email='$email';";
+        $sql="SELECT * FROM users INNER JOIN tasks on users.id = tasks.user INNER JOIN task_items on tasks.id = task_items.taskeid WHERE users.email='$email' ORDER BY tasks.id;";
+       
         $stmt = self::$instance->prepare($sql);
         $stmt->execute();
         $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $rows; 
+    }
+    function getDataItems(string $email):array{
+        $count=0;
+        $sql = "SELECT tasks.id, tasks.description, tasks.user, tasks.start_date, tasks.finish_date FROM tasks INNER JOIN users on users.id = tasks.user where users.email = '$email'";
+        //die($sql);
+        $stmt = self::$instance->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $data=[];
+        foreach($rows as $key=>$task){
+            //var_dump($task['id']);
+           
+            $sql = "SELECT * FROM task_items WHERE taskeId={$task['id']}";
+            $stmt = self::$instance->prepare($sql);
+            $stmt->execute();
+            $rowsItems = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+            $data[$count] = ['task' => $task, 'task_items' =>$rowsItems];
+            $count++;
+        }
+        
+       return $data;
     }
     function editTask($data){
         

@@ -62,7 +62,7 @@ class UserController extends Controller implements View,ExPDO{
 
             if(DB::selectUser($email,$pass)){
                 //die('es correcto podemos iniciar');
-                header('Location:/task');
+                header('Location:'.BASE.'/task');
                 
             }else{
                 //die('entrA');

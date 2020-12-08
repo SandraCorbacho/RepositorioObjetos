@@ -12,6 +12,7 @@ final class IndexController extends Controller{
     public function index(){
         $db = $this->getDB();
         $data = $db->selectAll('users');
+       
         //uso de funciones declaradas en el modelo
 
         //y definidas en la clase abstracta
