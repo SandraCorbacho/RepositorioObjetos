@@ -40,7 +40,7 @@ include 'base.tpl.php';
                         $table.="<td style='color:black;'>".$dato['description']."</td>";
                         $table.="<td style='color:black;'>-------</td>";
                         $table.="<td style='color:black;'>".$dato['user']."</td>";
-                        $table.="<td style='color:black;'>0</td>";
+                        $table.="<td style='color:black;background-color:red;'>No completada</td>";
                         $table.="<td style='color:black;'>".$dato['start_date']."</td>";
                         $table.="<td style='color:black;'>".$dato['finish_date']."</td>";
                         $table.=" <td style='color:black' class='options' ><span class='addsubtarea'>Añadir subtarea</span><span class='editTask' style='color:black'>Modificar</span> <span class='deleteTask' style='color:black'> Borrar</span></td>";
@@ -52,9 +52,16 @@ include 'base.tpl.php';
                             $table.= "<tr>";
                             $table.="<td style='color:black;'>".$taskItem['id']."</td>";
                             $table.="<td style='color:black;'></td>";
-                            $table.=" <td style='color:black; '>".$taskItem['itemName']."</td>";
+                            $table.=" <td style='color:black;'>".$taskItem['itemName']."</td>";
                             $table.="<td style='color:black;'></td>";
-                            $table.="<td style='color:black;'>".$taskItem['completed']."</td>";
+                            $table.="<td style='color:black;"; 
+                            
+                            if($taskItem['completed']){
+                                $table.= "background-color:greenlight; class='complete'>Completada</td>";
+                            }else{
+                                $table.= "background-color:lightcoral;' class='uncomplete'>No Completada</td>";
+                            }
+                           
                             $table.='</tr>';
                         }
                     }
@@ -94,13 +101,11 @@ include 'base.tpl.php';
     <div id='editForm' class='container-form editForm'>
                
                 <span class='closeform'>X</span>
-                 <form action="app/controllers/editTaskController.php" method='POST'>
+                 <form action="task/edit" method='POST'>
                  <h1 class='text-center mt-5 text-light'>Modificar Tarea </h2>
                         <input type="hidden" id='editIdItem' name='idItem'>
                         <label for="itemName">Nombre de la Tarea</label>
                         <input type="text" name='editItemName' id='editItemName' required>
-                        <label for="description">Descripción de la tarea</label>
-                        <textarea type="text" name='editDescription' id='editDescription' required> </textarea>
                         <label for="start_date">Fecha de inicio</label>
                         <input type="date" name='editStart_date' id='editStart_date' required >
                         <label for="finish_date">Fecha de fin</label>
@@ -116,6 +121,12 @@ include 'base.tpl.php';
                 <label for="description">Descripción de la tarea</label>                    
                 <input type="submit" value='Guardar Tarea'>
         </form>
+    </div>
+    <div class='container-form'>
+        
+            <form id='completed' action="task/completed" method='POST'>
+                <input type="text" id='idCompleted' name='idCompleted'>
+            </form>
     </div>
 </div>
 

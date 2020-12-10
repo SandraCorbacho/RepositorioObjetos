@@ -4,13 +4,17 @@
         "dbhost":"localhost",
         "dbuser":"sandra",
         "dbname":"tablero",
-        "dbpass":"linuxlinux"
+        "dbpass":"linuxlinux",
+        "web":"http://localhost:8080/",
+        "root":"/"
     },
     "dbconf_pro":{
         "driver":"mysql",
         "dbhost":"cosa.cesnuria.com",
-        "dbuser":"cosa_sandra",
-        "dbname":"cosa_tablero",
-        "dbpass":""
+        "dbuser":"CoSa_sandra",
+        "dbname":"CoSa_tablero",
+        "dbpass":"7kdew1Hn8y",
+        "web":"/tableroUF2/",
+        "root":"/tableroUF2/"
     }
 }

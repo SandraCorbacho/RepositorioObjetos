@@ -40,14 +40,14 @@ final class TaskController extends Controller implements View,ExPDO{
         ];
         
        $this->getDB()->insertTask($data);
-       header('Location:'.BASE.'/task');
+       header('Location:'.BASE.'task');
 
     }
     public function delete(){
 
         $idTask = filter_input(INPUT_POST,'idTask');
         $this->getDB()->deleteTask($idTask);
-        header('Location:'.BASE.'/task');
+        header('Location:'.BASE.'task');
     }
     public function subtarea(){
         $data=[
@@ -56,7 +56,28 @@ final class TaskController extends Controller implements View,ExPDO{
         ];
        
         $this->getDB()->insertSubtarea($data);
-        header('Location:'.BASE.'/task');
+        header('Location:'.BASE.'task');
+    }
+    public function edit(){
+        $idItem = filter_input(INPUT_POST,'idItem');
+        $itemName = filter_input(INPUT_POST,'editItemName');
+        $description = filter_input(INPUT_POST,'editDescription');
+        $start_date = filter_input(INPUT_POST,'editStart_date');
+        $finish_date = filter_input(INPUT_POST,'editFinish_date');
+        $data= [
+            'id'          => $idItem,
+            'email'       => $_SESSION['email'],
+            'itemName'    => $itemName,
+            'description' => $description,
+            'start_date'  => $start_date,
+            'finish_date' => $finish_date
+        ];
+        $this->getDB()->editTask($data);
+        header('Location:'.BASE.'task');
+    }
+    public function completed(){
+        $id = filter_input(INPUT_POST,'idCompleted');
+        die($_POST['idCompleted']);
     }
 
 

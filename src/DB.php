@@ -4,27 +4,17 @@ namespace App;
 
 class DB extends \PDO{
     static $instance;
-    protected array $config;
+    protected  $config;
 
     static function singleton(){
         if(!(self::$instance instanceof self)){
-            self::$instance = new self();
+            self::$instance=new self();
         }
         return self::$instance;
     }
-    
+
     public function __construct(){
-        //$this->config = $this->loadConf();
-        $config = $this->loadConf();
-        //determinar ento
-        $strdbconf = 'dbconf_'.$this->env();
-        
-        $dbconf = (array)$config->$strdbconf;
-        $dsn=$dbconf['driver'].':host='.$dbconf['dbhost'].';dbname=' . $dbconf['dbname'];
-        $usr=$dbconf['dbuser'];
-        $pass= $dbconf['dbpass'];
-        
-        parent::__construct($dsn,$usr,$pass);
+        parent::__construct(DSN,USR,PWD);
     }
     function registerUser($data){
         $stmt =self::$instance->prepare("INSERT INTO users (email,name,subname,password,role) values ('{$data['email']}','{$data['name']}', '{$data['surname']}', '{$data['pass']}', {$data['role']});");
@@ -182,20 +172,21 @@ class DB extends \PDO{
        return $data;
     }
     function editTask($data){
-        
+       
         try{
-            $sql = "UPDATE tasks SET description = '{$data['description']}',  start_date = '{$data['start_date']}', finish_date = ' {$data['finish_date']}' where tasks.id={$data['id']};";
+            $sql = "UPDATE tasks SET itemName = '{$data['itemName']}',  start_date = '{$data['start_date']}', finish_date = ' {$data['finish_date']}' where tasks.id={$data['id']};";
             $stmt = self::$instance->prepare($sql);
             $stmt->execute();
            
-        }catch(PDOException $e){
+        }catch(\PDOException $e){
            
             return $e;
         }
         
         try{
-         
-            $sql = "UPDATE task_items SET itemName = '{$data[itemName]}' where taskeId={$data['id']};";
+            
+            $sql = "UPDATE tasks SET description='{$data['itemName']}' where id={$data['id']};";
+            //die($sql);
             $stmt = self::$instance->prepare($sql);
             $stmt->execute();
         }catch(PDOException $e){

@@ -1,19 +1,18 @@
 <?php
 
-
-    ini_set('display_errors', 'On');
-
-    require __DIR__.'/vendor/autoload.php';
-    $base = \htmlentities($_SERVER['REQUEST_URI']);
-    //die($base);
-    if($base =='//'){
-        $base = '/';
-    }
+ini_set('display_errors','On');
    
-    define('BASE',$base);
-    session_start();
-    use App\App;
 
-    App::run();
+require __DIR__.'/vendor/autoload.php';
 
-    //Session::init();
+use App\App;
+
+$conf=App::init();
+//constants d'enrutament i BBDD
+define('BASE',$conf['web']);
+define('ROOT',$conf['root']);
+define('DSN',$conf['driver'].':host='.$conf['dbhost'].';dbname='.$conf['dbname']);
+define('USR',$conf['dbuser']);
+define('PWD',$conf['dbpass']);
+
+App::run();

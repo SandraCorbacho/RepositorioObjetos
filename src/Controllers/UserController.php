@@ -62,7 +62,7 @@ class UserController extends Controller implements View,ExPDO{
 
             if(DB::selectUser($email,$pass)){
                 //die('es correcto podemos iniciar');
-                header('Location:'.BASE.'/task');
+                header('Location:'.BASE.'task');
                 
             }else{
                 //die('entrA');
@@ -70,10 +70,12 @@ class UserController extends Controller implements View,ExPDO{
                 $this->render($dataView,'index');
             }
 
-            
-      
         
         }
-    }
+
+        $dataView = ['title' => 'home','error'=>'Contraseña o Usuario incorrecto'];
+        $this->render($dataView,'index');
+
+        }
     }
 }
