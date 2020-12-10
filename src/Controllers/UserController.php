@@ -66,8 +66,7 @@ class UserController extends Controller implements View,ExPDO{
                 
             }else{
                 //die('entrA');
-                $dataView = ['title' => 'home','data'=>'Usuario o contraseña incorrectos'];
-                $this->render($dataView,'index');
+                header('Location:'.BASE.'task');
             }
 
         

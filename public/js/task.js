@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-  
+   
     $('#addTask').click(function(){
       
         $('#addForm').attr('style','display:flex')
@@ -40,16 +40,16 @@ $( document ).ready(function() {
     });
     $('.uncomplete').click(function(){
         let fila = $(this).parent();
-        id = $(fila[0]['cells'][0]).text()
-        $('#idCompleted').text(id)
-        $(this).css('backgroundColor', 'green');
+        id = $(fila[0]['cells'][0]).text();
         $(this).removeClass('uncomplete');
         $(this).addClass('complete');
-        $(this).text('Completada')
-        
-        $('#completed').submit()
-
-       
+        $('#idCompleted').val(id);
+        if( $('#idCompleted').val()!= ''){
+            $('#completed').submit()
+        }
+    
+               
     })
+    
     
 })

@@ -3,7 +3,7 @@
 include 'base.tpl.php';
 
 ?>
-<script src="/public/js/task.js"></script>
+<script src="public/js/task.js"></script>
 <div class="container contaienr-task">
 	<div class="row login_box container-banner-principal">
 	    <div class="col-md-12 col-xs-12" align="center">
@@ -57,7 +57,7 @@ include 'base.tpl.php';
                             $table.="<td style='color:black;"; 
                             
                             if($taskItem['completed']){
-                                $table.= "background-color:greenlight; class='complete'>Completada</td>";
+                                $table.= "background-color:lightgreen; class='complete'>Completada</td>";
                             }else{
                                 $table.= "background-color:lightcoral;' class='uncomplete'>No Completada</td>";
                             }
@@ -125,7 +125,7 @@ include 'base.tpl.php';
     <div class='container-form'>
         
             <form id='completed' action="task/completed" method='POST'>
-                <input type="text" id='idCompleted' name='idCompleted'>
+                <input type="number" id='idCompleted' name='idCompleted'>
             </form>
     </div>
 </div>

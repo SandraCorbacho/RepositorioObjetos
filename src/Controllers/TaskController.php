@@ -77,7 +77,8 @@ final class TaskController extends Controller implements View,ExPDO{
     }
     public function completed(){
         $id = filter_input(INPUT_POST,'idCompleted');
-        die($_POST['idCompleted']);
+        $this->getDB()->completeTask($id);
+        header('Location:'.BASE.'task');
     }
 
 

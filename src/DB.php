@@ -229,4 +229,15 @@ class DB extends \PDO{
         
         
     }
+    public function completeTask($id){
+        try{
+            $sql = "UPDATE task_items set completed = true where id = $id";
+            $stmt = self::$instance->prepare($sql);
+         
+            $stmt->execute();
+            return true;
+           }  catch(ExceptionErr $e){
+            return false;
+           }
+    }
 }
