@@ -14,7 +14,8 @@ class UserController extends Controller implements View,ExPDO{
     }
 
     public function index(){
-        echo "User";
+      
+      
     }
     public function login(){
         
@@ -34,15 +35,16 @@ class UserController extends Controller implements View,ExPDO{
             ];
             
             if($exist){
-                //$session = new Session('loginMessage');
-                $_SESSION['loginMessage'] = 'Usuario ya existente en nuestra base de datos';
+               
+               Session::set('loginMessage','Usuario ya existente en nuestra base de datos');
+                
                 
             }else{
                 
                 $register = $db->registerUser($data);
                 if($register){
-                    $_SESSION['loginMessage'] = 'Usuario registrado con éxito';
-                
+                    Session::set('loginMessage','Usuario registrado con éxito');
+                   
                 }
                 
             
@@ -58,21 +60,23 @@ class UserController extends Controller implements View,ExPDO{
 
             
         
-
+        
             if(DB::selectUser($email,$pass)){
-                //die('es correcto podemos iniciar');
+               Session::delete('loginMessage');
+                Session::set('email',$email);
                 header('Location:'.BASE.'task');
-                
+               
             }else{
-                //die('entrA');
-                header('Location:'.BASE.'task');
+               
+                Session::set('loginMessage','Contraseña o Usuario incorrecto');
+                
+                header('Location:'.BASE);
             }
 
         
         }
 
-        $dataView = ['title' => 'home','error'=>'Contraseña o Usuario incorrecto'];
-        $this->render($dataView,'index');
+        
 
         }
     }

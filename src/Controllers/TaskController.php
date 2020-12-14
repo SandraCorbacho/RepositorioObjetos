@@ -16,10 +16,10 @@ final class TaskController extends Controller implements View,ExPDO{
     }
     public function index(){
         
-        if(!isset($_SESSION['email'])){
-            header('Location:'.BASE.'/');
+        if(Session::get('email')==null){
+            header('Location:'.BASE);
         }
-        $user = $_SESSION['email'];
+        $user = Session::get('email');
         //$data = $this->getDB()->selectWithoutJoin($user);
         $data = $this->getDB()->getDataItems($user);
         
@@ -32,7 +32,7 @@ final class TaskController extends Controller implements View,ExPDO{
             'itemName' => filter_input(INPUT_POST,'description'),
             'description' => filter_input(INPUT_POST,'itemName'),
             
-            'email' => $_SESSION['email'],
+            'email' => Session::get('email'),
             'start_date' =>filter_input(INPUT_POST,'start_date'),
             'finish_date' =>filter_input(INPUT_POST,'finish_date'),
 
@@ -71,7 +71,7 @@ final class TaskController extends Controller implements View,ExPDO{
         $finish_date = filter_input(INPUT_POST,'editFinish_date');
         $data= [
             'id'          => $idItem,
-            'email'       => $_SESSION['email'],
+            'email'       => Session::get('email'),
             'itemName'    => $itemName,
             'description' => $description,
             'start_date'  => $start_date,
@@ -85,7 +85,7 @@ final class TaskController extends Controller implements View,ExPDO{
         $itemName = filter_input(INPUT_POST,'editItemName');
         $data=[
             'id'          => $idItem,
-            'email'       => $_SESSION['email'],
+            'email'       => Session::get('email'),
             'itemName'    => $itemName
         ];
       

@@ -5,6 +5,7 @@ include 'base.tpl.php';
 ?>
 <script src="public/js/task.js"></script>
 <div class="container contaienr-task">
+    <div><a href="<?=BASE?>logout">Cerrar Sesión</a></div>
 	<div class="row login_box container-banner-principal">
 	    <div class="col-md-12 col-xs-12" align="center">
             <div class="line title"><h3>Tu Tablero de Tareas</h3><span id='addTask'>Nueva Tarea +</span></div>

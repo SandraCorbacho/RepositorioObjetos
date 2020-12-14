@@ -10,6 +10,9 @@ final class IndexController extends Controller{
         parent::__construct($request, $session);
     }
     public function index(){
+        if(Session::get('email') != null){
+            header('Location:'.BASE.'task');
+        }
         $db = $this->getDB();
         $data = $db->selectAll('users');
        

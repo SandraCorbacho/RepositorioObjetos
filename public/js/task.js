@@ -44,7 +44,7 @@ $( document ).ready(function() {
     $('.editSubTask').click(function(){
         let fila = $(this).parent().parent();
         $('#editSubtaskeId').val($(fila[0]['cells'][0]).text());
-        $('#editSubItemName').val($(fila[0]['cells'][1]).text());
+        $('#editSubItemName').val($(fila[0]['cells'][2]).text());
        
         $('#editSubForm').attr('style','display:flex');
 
