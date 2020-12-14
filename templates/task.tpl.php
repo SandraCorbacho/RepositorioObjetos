@@ -48,7 +48,6 @@ include 'base.tpl.php';
                         $table.= "<tr>";
                         
                     }else if($key == 'task_items'){
-                        $key=0;
                         foreach($dato as $key=>$taskItem){
                             $table.= "<tr>";
                             $table.="<td style='color:black;'>".$taskItem['id']."</td>";
@@ -62,12 +61,13 @@ include 'base.tpl.php';
                             }else{
                                 $table.= "background-color:lightcoral;' class='uncomplete'>No Completada</td>";
                             }
-                           
+                            $table.="<td style='color:black;'></td>";
+                            $table.="<td style='color:black;'></td>";
+                            $table.="<td colspan='3' style='color:black' class='options' ><span class='editSubTask' style='color:black'>Modificar</span> <span class='deleteSubTask' style='color:black'> Borrar</span></td>";
                             $table.='</tr>';
                             
                           
                         }
-                        echo "<input type='number' value='".($key+1). "'>";
                     }
                 }
                    
@@ -102,6 +102,15 @@ include 'base.tpl.php';
                         <input type="submit" value='Eleminar Tarea'>
                 </form>    
     </div>
+    <div id='deleteSubForm' class='container-form deleteSubForm'>
+                <span class='closeform'>X</span>
+                 <form action="task/deleteSubtarea" method='POST'>
+                        <label for="itemName">Seguro que quieres borrar: </label>
+                        <input type="hidden" id='idSubTask' name='idTask'>
+                        <p id='Subdescription'></p>
+                        <input type="submit" value='Eleminar Tarea'>
+                </form>    
+    </div>
     <div id='editForm' class='container-form editForm'>
                
                 <span class='closeform'>X</span>
@@ -117,6 +126,16 @@ include 'base.tpl.php';
                         <input type="submit" value='Guardar Cambios'>
                 </form>    
     </div>
+    <div id='editSubForm' class='container-form editForm'>
+        <span class='closeform'>X</span>
+        <form action="task/editSubtarea" method='POST'>
+        <h1 class='text-center mt-5 text-light'>Modificar Tarea </h2>
+            <input type="hidden" id='editSubtaskeId' name='idItem'>
+            <label for="editItemName">Subtarea</label>
+            <input type="text" name='editItemName' id='editSubItemName' required>
+            <input type="submit" value='Guardar Cambios'>
+        </form>    
+   </div>
     <div id='subtareaForm' class='container-form subtarea'>
         <span class='closeform'>X</span>
             <form action="task/subtarea" method='POST'>

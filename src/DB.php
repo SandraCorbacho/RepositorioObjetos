@@ -140,6 +140,25 @@ class DB extends \PDO{
          }
          return true;
      }
+    function deleteSubtareaTask($idTask){
+        
+        try{
+         $sql = "DELETE FROM task_items WHERE id = $idTask;";
+         $stmt = self::$instance->prepare($sql);
+         $stmt->execute();
+         }catch(PDOException $e){
+           
+                 return false;
+         }
+         try{
+         $sql = "DELETE FROM tasks WHERE id = $idTask;";
+          $stmt = self::$instance->prepare($sql);
+         $stmt->execute();
+         }catch(PDOException $e){
+             return false;
+         }
+         return true;
+     }
      function selectWithoutJoin(string $email):array{
         
         $sql="SELECT * FROM users INNER JOIN tasks on users.id = tasks.user INNER JOIN task_items on tasks.id = task_items.taskeid WHERE users.email='$email' ORDER BY tasks.id;";
@@ -194,6 +213,23 @@ class DB extends \PDO{
          
             return $e;
         }
+        return true;
+       
+    }
+    function editSubTask($data){
+     
+        try{
+            $sql = "UPDATE task_items SET itemName = '{$data['itemName']}' where id={$data['id']};";
+            
+            $stmt = self::$instance->prepare($sql);
+            $stmt->execute();
+           
+        }catch(\PDOException $e){
+           
+            return $e;
+        }
+        
+      
         return true;
        
     }

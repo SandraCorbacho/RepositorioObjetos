@@ -48,6 +48,12 @@ final class TaskController extends Controller implements View,ExPDO{
         $this->getDB()->deleteTask($idTask);
         header('Location:'.BASE.'task');
     }
+    public function deleteSubtarea(){
+
+        $idTask = filter_input(INPUT_POST,'idTask');
+        $this->getDB()->deleteSubtareaTask($idTask);
+        header('Location:'.BASE.'task');
+    }
     public function subtarea(){
         $data=[
         'idItem' => filter_input(INPUT_POST,'idItem'),
@@ -72,6 +78,18 @@ final class TaskController extends Controller implements View,ExPDO{
             'finish_date' => $finish_date
         ];
         $this->getDB()->editTask($data);
+        header('Location:'.BASE.'task');
+    }
+    public function editSubtarea(){
+        $idItem = filter_input(INPUT_POST,'idItem');
+        $itemName = filter_input(INPUT_POST,'editItemName');
+        $data=[
+            'id'          => $idItem,
+            'email'       => $_SESSION['email'],
+            'itemName'    => $itemName
+        ];
+      
+        $this->getDB()->editSubTask($data);
         header('Location:'.BASE.'task');
     }
     public function completed(){

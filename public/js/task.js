@@ -10,7 +10,7 @@ $( document ).ready(function() {
         $('#deleteForm').attr('style','display:none');
         $('#addForm').attr('style','display:none');
         $('#editForm').attr('style','display:none');
-        
+        $('#editSubForm').attr('style','display:none');
 
     })
     $('.deleteTask').click(function(){
@@ -20,6 +20,14 @@ $( document ).ready(function() {
         $('#idTask').val(idTask);
         $('#description').text(description);
         $('#deleteForm').attr('style','display:flex');
+    })
+    $('.deleteSubTask').click(function(){
+        let fila = $(this).parent().parent();
+        let idTask = ($(fila[0]['cells'][0]).text());
+        let description = ($(fila[0]['cells'][2]).text());
+        $('#idSubTask').val(idTask);
+        $('#Subdescription').text(description);
+        $('#deleteSubForm').attr('style','display:flex');
     })
     $('.editTask').click(function(){
         let fila = $(this).parent().parent();
@@ -32,6 +40,17 @@ $( document ).ready(function() {
         $('#editForm').attr('style','display:flex');
 
     })
+
+    $('.editSubTask').click(function(){
+        let fila = $(this).parent().parent();
+        $('#editSubtaskeId').val($(fila[0]['cells'][0]).text());
+        $('#editSubItemName').val($(fila[0]['cells'][1]).text());
+       
+        $('#editSubForm').attr('style','display:flex');
+
+    })
+    
+
     $('.addsubtarea').click(function(){
         let fila = $(this).parent().parent();
         $('#subtareaIdItem').val($(fila[0]['cells'][0]).text());
@@ -51,15 +70,12 @@ $( document ).ready(function() {
                
     })
     $('.complete').click(function(){
-       
         let fila = $(this).parent();
         id = $(fila[0]['cells'][0]).text();
         $('#idCompleted').val(id);
         if( $('#idCompleted').val()!= ''){
             $('#completed').submit()
-        }
-       
-               
+        }         
     })
     
     
