@@ -12,6 +12,7 @@ final class logoutController extends Controller implements View,ExPDO{
     
     public function index(){
        Session::delete('email');
+       Session::delete('loginMessage');
        header('Location:'.BASE);
     }
     
