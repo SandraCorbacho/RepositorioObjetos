@@ -176,6 +176,7 @@ body{
    .contaienr-task td{
        border:1px solid red;
        padding: 5px;
+       color:black
    }
    th{
        text-align: center;

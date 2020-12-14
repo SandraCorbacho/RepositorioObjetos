@@ -40,7 +40,7 @@ include 'base.tpl.php';
                         $table.="<td style='color:black;'>".$dato['description']."</td>";
                         $table.="<td style='color:black;'>-------</td>";
                         $table.="<td style='color:black;'>".$dato['user']."</td>";
-                        $table.="<td style='color:black;background-color:red;'>No completada</td>";
+                        $table.="<td class='color:black;'>-------</td>";
                         $table.="<td style='color:black;'>".$dato['start_date']."</td>";
                         $table.="<td style='color:black;'>".$dato['finish_date']."</td>";
                         $table.=" <td style='color:black' class='options' ><span class='addsubtarea'>Añadir subtarea</span><span class='editTask' style='color:black'>Modificar</span> <span class='deleteTask' style='color:black'> Borrar</span></td>";
@@ -48,7 +48,8 @@ include 'base.tpl.php';
                         $table.= "<tr>";
                         
                     }else if($key == 'task_items'){
-                        foreach($dato as $taskItem){
+                        $key=0;
+                        foreach($dato as $key=>$taskItem){
                             $table.= "<tr>";
                             $table.="<td style='color:black;'>".$taskItem['id']."</td>";
                             $table.="<td style='color:black;'></td>";
@@ -57,13 +58,16 @@ include 'base.tpl.php';
                             $table.="<td style='color:black;"; 
                             
                             if($taskItem['completed']){
-                                $table.= "background-color:lightgreen; class='complete'>Completada</td>";
+                                $table.= "background-color:lightgreen;' class='complete'>Completada</td>";
                             }else{
                                 $table.= "background-color:lightcoral;' class='uncomplete'>No Completada</td>";
                             }
                            
                             $table.='</tr>';
+                            
+                          
                         }
+                        echo "<input type='number' value='".($key+1). "'>";
                     }
                 }
                    

@@ -22,8 +22,7 @@ final class TaskController extends Controller implements View,ExPDO{
         $user = $_SESSION['email'];
         //$data = $this->getDB()->selectWithoutJoin($user);
         $data = $this->getDB()->getDataItems($user);
-        //v//ar_dump($data);
-        //die();
+        
         $dataView = ['title' => 'task','data'=>$data];
         $this->render($dataView,'task');
     }
@@ -77,7 +76,8 @@ final class TaskController extends Controller implements View,ExPDO{
     }
     public function completed(){
         $id = filter_input(INPUT_POST,'idCompleted');
-        $this->getDB()->completeTask($id);
+        $count = $this->getDB()->completeTask($id);
+       
         header('Location:'.BASE.'task');
     }
 

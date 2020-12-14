@@ -47,9 +47,21 @@ $( document ).ready(function() {
         if( $('#idCompleted').val()!= ''){
             $('#completed').submit()
         }
-    
+        
                
     })
+    $('.complete').click(function(){
+       
+        let fila = $(this).parent();
+        id = $(fila[0]['cells'][0]).text();
+        $('#idCompleted').val(id);
+        if( $('#idCompleted').val()!= ''){
+            $('#completed').submit()
+        }
+       
+               
+    })
+    
     
     
 })

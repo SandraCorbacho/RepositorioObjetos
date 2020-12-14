@@ -167,6 +167,7 @@ class DB extends \PDO{
             
             $data[$count] = ['task' => $task, 'task_items' =>$rowsItems];
             $count++;
+            
         }
         
        return $data;
@@ -231,10 +232,22 @@ class DB extends \PDO{
     }
     public function completeTask($id){
         try{
-            $sql = "UPDATE task_items set completed = true where id = $id";
+            $sql = "SELECT completed FROM task_items WHERE id = $id LIMIT 1";
             $stmt = self::$instance->prepare($sql);
-         
             $stmt->execute();
+            $completed = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+           
+            if($completed[0]["completed"]){
+                $completed = "false";
+            }else{
+                $completed = "true";
+            }
+           
+            $sql = "UPDATE task_items set completed = $completed where id = $id";
+            
+            $stmt = self::$instance->prepare($sql);
+            $stmt->execute();
+
             return true;
            }  catch(ExceptionErr $e){
             return false;

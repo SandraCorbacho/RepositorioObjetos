@@ -44,12 +44,11 @@ class UserController extends Controller implements View,ExPDO{
                     $_SESSION['loginMessage'] = 'Usuario registrado con éxito';
                 
                 }
-
-                $dataView = ['title' => 'home','error'=>$_SESSION['loginMessage']];
-                $this->render($dataView,'index');
                 
             
             }
+            header('Location:'.BASE);
+
     }else{
         
       if($exist){
